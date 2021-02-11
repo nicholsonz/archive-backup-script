@@ -14,7 +14,7 @@ DAY=$(date +"%a")
 LOGFILE="$BACKUP_DIR/arcvdbkp.log"
 
 
-backup_files="/home /etc"
+BACKUP_FILES="/home /etc"
 
 if [ ! -d $BACKUP_DIR ]; then
   echo "Creating backup directory."
@@ -29,12 +29,12 @@ echo "  Archive Backup Start! $(date)"
 echo "####################################################"
 
 
-echo "Backing up $backup_files to $BACKUP_DIR/$DAY-$TODAY.tgz"
+echo "Backing up $BACKUP_FILES to $BACKUP_DIR/$DAY-$TODAY.tgz"
 echo
 
 
 if [ ! -e $BACKUP_DIR/$DAY-$TODAY.tgz ]; then
-        tar czp --exclude="*[Cc]ache*" --exclude="[Tt]rash" --exclude="*[Ss]team" --exclude="$BACKUP_DIR" --exclude="/home/*/Downloads" -f $BACKUP_DIR/$DAY-$TODAY.tgz $backup_files
+        tar czp --exclude="*[Cc]ache*" --exclude="[Tt]rash" --exclude="*[Ss]team" --exclude="$BACKUP_DIR" --exclude="/home/*/Downloads" -f $BACKUP_DIR/$DAY-$TODAY.tgz $BACKUP_FILES
    else
       echo "Daily backup already exists."
 fi
@@ -76,8 +76,8 @@ echo
 echo "**************************"
 echo
 
-day_name=$(date +"%A")
-echo "Cleaning up old $day_name backups"
+DAY_NAME=$(date +"%A")
+echo "Cleaning up old $DAY_NAME backups"
 find $BACKUP_DIR -name "$DAY*" -type f -mtime +8 -exec rm -f {} \;
 
 echo
