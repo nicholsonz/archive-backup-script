@@ -57,9 +57,11 @@ echo
 
 
 if [ ! -e $BACKUP_DIR/$TODAY.tgz ]; then
-        tar czp --exclude="*[Cc]ache*" --exclude="[Tt]rash" --exclude="*[Ss]team" --exclude="$BACKUP_DIR" --exclude="/home/*/Downloads" -f $BACKUP_DIR/$TODAY.tgz $BACKUP_FILES 2>/dev/null  
+        tar czp --exclude="*[Cc]ache*" --exclude="[Tt]rash" --exclude="*[Ss]team" --exclude="$BACKUP_DIR" --exclude="/home/*/Downloads" -f $BACKUP_DIR/$TODAY.tgz $BACKUP_FILES 2>/dev/null
+        echo "$(date) Successful backup!" >> "$BACKUP_DIR/arcvdbkp.log"  
     else
       echo "Daily backup already exists."
+        echo "$(date) Backup not successful!" >> "$BACKUP_DIR/arcvdbkp.log"
 fi
 
 
@@ -81,7 +83,6 @@ echo
 ls -lh $BACKUP_DIR/
 
 if test -e "$BACKUP_DIR/arcvdbkp.log"; then
- echo "$(date) Success!" >> "$BACKUP_DIR/arcvdbkp.log"    
  echo
  echo "##############################################################"
  echo "  Archived Backup Completed! $(date)"
@@ -91,3 +92,5 @@ else
 	touch "$BACKUP_DIR/arcvdbkp.log"
 	echo "New log file created!"
 fi
+
+exit 0
