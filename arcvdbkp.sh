@@ -44,7 +44,7 @@ if [ -d $BACKUP_DIR ]; then
   mkdir $BACKUP_DIR
 else
   echo "Error!  Cannot create backup dir. Check dir permissions or backup drive availability."
-
+  exit 1
 fi
 echo
 echo "##############################################################"
