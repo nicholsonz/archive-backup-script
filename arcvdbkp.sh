@@ -5,7 +5,7 @@
 BACKUP_DIR="/mnt/backup/$(hostname)/arcvdbkp"
 TODAY=$(date +"%a")
 LOGFILE="$BACKUP_DIR/arcvdbkp.log"
-BACKUP_FILES="/home /etc"
+BACKUP_FILES="/home /etc /var/www"
 
 if test ! -e "$BACKUP_DIR/arcvdbkp.log"; then
     touch "$BACKUP_DIR/arcvdbkp.log"
